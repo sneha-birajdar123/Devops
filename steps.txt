@@ -1,0 +1,83 @@
+Setup for DevOps
+
+1. Make sure you have a Cloud Service.
+like: GCP, AWS, Azure, or Digital Ocean.
+
+2. Make sure your project/App is working fine in locally.
+
+3. Purchase a domain and Cloud Service.
+
+4. Domains
+- Domains can be Purchased from 
+1. NameCheap
+2. Big Rock
+3. Hostinger
+4. GoDaddy
+
+5. Cloud service instance:
+- AWS
+- Azure
+- GCP
+- Digital Ocean
+
+6. Local app setup: 
+
+1. HTML and Backend setup
+. Make sure you have build folder and index.html file in it.
+. In the same folder you should have simple express server, with these code lines.
+3. Add the path and url lines in express (copy the code below for app.js)
+
+......
+
+import express from "express";
+
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+const app = express()
+const PORT = 5000
+
+app.use(express.static(path.join(__dirname, "build")))
+
+app.get("/sneha", (req, res) => {
+    try {
+        res.status(200).json({msg: "Hello world!"})
+    } catch (error) {
+        res.status(500).json(console.log(error)
+        )
+    }
+})
+
+app.get("/rahman", (req, res) => {
+    try {
+        res.status(200).json({msg: "helooo rahmannnn"})
+    } catch (error) {
+        res.status(500).json({msg: error})
+    }
+})
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"))
+})
+
+app.listen(PORT, () => {
+    console.log("server is up and running at port");
+})
+
+..............
+
+2. React vite + Backend Setup:
+
+. Make sure hello world in react is working tailwind css is optional or bootstra...add it
+. cd client
+. npm run build
+. this will generate a dist folder.
+. which is optimized folder for your whole reat app
+  (delete the build folder from server)
+. mv dist ../server
+. cd server
+. open app.js and change all build folders to dist
+. npm start.
